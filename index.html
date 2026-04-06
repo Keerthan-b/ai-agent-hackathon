@@ -3,17 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🤖 AI Agent Hackathon - 10 April 2026</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <title>AI Agent Building Hackathon | Mandate Team</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #ff6b35;
-            --secondary: #f7c531;
-            --accent: #00d4aa;
-            --dark: #0a0a0f;
-            --dark-card: #12121a;
-            --text: #ffffff;
-            --text-muted: #a0a0b0;
+            --primary: #FF6B35;
+            --primary-dark: #e85a27;
+            --secondary: #1A1A2E;
+            --accent: #16213E;
+            --light: #F8F9FA;
+            --white: #FFFFFF;
+            --text: #1A1A2E;
+            --text-muted: #6C757D;
+            --border: #E9ECEF;
         }
 
         * {
@@ -23,593 +25,732 @@
         }
 
         body {
-            font-family: 'Outfit', sans-serif;
-            background: var(--dark);
+            font-family: 'DM Sans', sans-serif;
+            background: var(--light);
             color: var(--text);
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-
-        /* Animated Background */
-        .bg-animation {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            overflow: hidden;
-        }
-
-        .bg-animation::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: 
-                radial-gradient(ellipse at 20% 20%, rgba(255, 107, 53, 0.15) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 80%, rgba(0, 212, 170, 0.1) 0%, transparent 50%),
-                radial-gradient(ellipse at 50% 50%, rgba(247, 197, 49, 0.08) 0%, transparent 40%);
-            animation: pulse 8s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.1); opacity: 0.8; }
-        }
-
-        /* Floating shapes */
-        .shape {
-            position: absolute;
-            border-radius: 50%;
-            opacity: 0.1;
-            animation: float 20s infinite ease-in-out;
-        }
-
-        .shape:nth-child(1) {
-            width: 300px;
-            height: 300px;
-            background: var(--primary);
-            top: 10%;
-            left: 5%;
-            animation-delay: 0s;
-        }
-
-        .shape:nth-child(2) {
-            width: 200px;
-            height: 200px;
-            background: var(--secondary);
-            top: 60%;
-            right: 10%;
-            animation-delay: -5s;
-        }
-
-        .shape:nth-child(3) {
-            width: 150px;
-            height: 150px;
-            background: var(--accent);
-            bottom: 20%;
-            left: 30%;
-            animation-delay: -10s;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            25% { transform: translateY(-20px) rotate(5deg); }
-            50% { transform: translateY(0) rotate(0deg); }
-            75% { transform: translateY(20px) rotate(-5deg); }
+            line-height: 1.6;
         }
 
         .container {
-            max-width: 900px;
+            max-width: 1100px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 0 24px;
+        }
+
+        /* Header */
+        header {
+            background: var(--white);
+            border-bottom: 1px solid var(--border);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--text);
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .logo-text {
+            font-weight: 700;
+            font-size: 20px;
+        }
+
+        .logo-text span {
+            color: var(--primary);
+        }
+
+        nav {
+            display: flex;
+            gap: 32px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-weight: 500;
+            font-size: 15px;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: var(--primary);
         }
 
         /* Hero Section */
         .hero {
+            padding: 80px 0;
             text-align: center;
-            padding: 60px 20px;
-            position: relative;
+            background: linear-gradient(180deg, var(--white) 0%, var(--light) 100%);
         }
 
         .hero-badge {
             display: inline-block;
-            background: linear-gradient(135deg, var(--primary), #ff8f5a);
-            padding: 8px 20px;
-            border-radius: 30px;
+            background: #FFF3ED;
+            color: var(--primary);
+            padding: 8px 16px;
+            border-radius: 50px;
             font-size: 14px;
             font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 20px;
-            animation: slideDown 0.6s ease-out;
-        }
-
-        @keyframes slideDown {
-            from { transform: translateY(-20px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+            margin-bottom: 24px;
         }
 
         .hero h1 {
-            font-size: clamp(36px, 8vw, 72px);
-            font-weight: 800;
+            font-size: 56px;
+            font-weight: 700;
             line-height: 1.1;
             margin-bottom: 20px;
-            background: linear-gradient(135deg, var(--text) 0%, var(--secondary) 50%, var(--primary) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: fadeIn 0.8s ease-out 0.2s both;
+            color: var(--secondary);
         }
 
         .hero h1 span {
-            display: block;
-            font-size: 0.4em;
-            color: var(--text-muted);
-            font-weight: 400;
-            -webkit-text-fill-color: var(--text-muted);
-            margin-top: 10px;
+            color: var(--primary);
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .hero-date {
-            display: inline-flex;
-            align-items: center;
-            gap: 15px;
-            background: var(--dark-card);
-            padding: 15px 30px;
-            border-radius: 50px;
+        .hero-subtitle {
             font-size: 20px;
-            font-weight: 600;
-            border: 1px solid rgba(255, 107, 53, 0.3);
-            margin-top: 20px;
-            animation: fadeIn 0.8s ease-out 0.4s both;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 40px;
         }
 
-        .hero-date .icon {
-            font-size: 24px;
+        .hero-meta {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
         }
 
-        .hero-date .date {
-            color: var(--secondary);
-        }
-
-        /* Cards */
-        .card {
-            background: var(--dark-card);
-            border-radius: 20px;
-            padding: 30px;
-            margin-bottom: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: all 0.3s ease;
-        }
-
-        .card:hover {
-            border-color: rgba(255, 107, 53, 0.3);
-            transform: translateY(-2px);
-        }
-
-        .card-title {
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 20px;
+        .meta-item {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 8px;
+            font-size: 15px;
+            color: var(--text-muted);
         }
 
-        .card-title .icon {
-            font-size: 28px;
+        .meta-item svg {
+            width: 20px;
+            height: 20px;
+            color: var(--primary);
         }
 
-        /* Resources Grid */
-        .resources-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 15px;
-        }
-
-        .resource-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 15px;
-            padding: 20px;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .resource-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 4px;
-            height: 100%;
-            background: linear-gradient(180deg, var(--primary), var(--accent));
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .resource-card:hover::before {
-            opacity: 1;
-        }
-
-        .resource-card:hover {
-            background: rgba(255, 255, 255, 0.05);
-            transform: translateX(5px);
-        }
-
-        .resource-card a {
+        .meta-item strong {
             color: var(--text);
-            text-decoration: none;
-            font-weight: 600;
+        }
+
+        /* Event Details Cards */
+        .details-section {
+            padding: 60px 0;
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .detail-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 28px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .detail-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+        }
+
+        .detail-card-icon {
+            width: 48px;
+            height: 48px;
+            background: #FFF3ED;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+            color: var(--primary);
+        }
+
+        .detail-card h3 {
             font-size: 18px;
-            display: block;
+            font-weight: 600;
             margin-bottom: 8px;
         }
 
-        .resource-card a:hover {
-            color: var(--secondary);
-        }
-
-        .resource-card .desc {
+        .detail-card p {
             color: var(--text-muted);
             font-size: 14px;
         }
 
-        /* Problem Link */
-        .problem-link {
+        /* About Section */
+        .about-section {
+            padding: 80px 0;
+            background: var(--white);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .section-header h2 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 18px;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-text p {
+            font-size: 16px;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        .about-text ul {
+            list-style: none;
+        }
+
+        .about-text li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 0;
+            font-size: 15px;
+        }
+
+        .about-text li::before {
+            content: "✓";
+            width: 24px;
+            height: 24px;
+            background: #FFF3ED;
+            color: var(--primary);
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 15px;
-            background: linear-gradient(135deg, var(--primary), #ff8f5a);
-            color: white;
-            padding: 20px 40px;
-            border-radius: 15px;
-            text-decoration: none;
+            font-size: 12px;
             font-weight: 700;
-            font-size: 18px;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
         }
 
-        .problem-link:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(255, 107, 53, 0.4);
-        }
-
-        /* Features Grid */
-        .features-grid {
+        .about-stats {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
         }
 
-        .feature-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 15px;
-            padding: 20px;
+        .stat-box {
+            background: var(--light);
+            border-radius: 16px;
+            padding: 24px;
             text-align: center;
-            transition: all 0.3s ease;
         }
 
-        .feature-card:hover {
-            background: rgba(255, 107, 53, 0.1);
+        .stat-box h4 {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 4px;
+        }
+
+        .stat-box p {
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        /* Resources Section */
+        .resources-section {
+            padding: 80px 0;
+            background: var(--light);
+        }
+
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .resource-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 28px;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .resource-card:hover {
             border-color: var(--primary);
+            box-shadow: 0 8px 24px rgba(255,107,53,0.15);
         }
 
-        .feature-icon {
-            font-size: 40px;
-            margin-bottom: 10px;
+        .resource-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
         }
 
-        .feature-text {
-            font-weight: 500;
+        .resource-card h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text);
         }
 
-        /* Timeline */
+        .resource-card-arrow {
+            width: 32px;
+            height: 32px;
+            background: var(--light);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            transition: all 0.2s;
+        }
+
+        .resource-card:hover .resource-card-arrow {
+            background: var(--primary);
+            color: white;
+        }
+
+        .resource-card p {
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        /* Timeline Section */
+        .timeline-section {
+            padding: 80px 0;
+            background: var(--white);
+        }
+
         .timeline {
-            position: relative;
-            padding-left: 30px;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 8px;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: linear-gradient(180deg, var(--primary), var(--accent), var(--secondary));
+            max-width: 700px;
+            margin: 0 auto;
         }
 
         .timeline-item {
-            position: relative;
-            padding: 15px 0;
             display: flex;
-            gap: 20px;
-            align-items: center;
+            gap: 24px;
+            padding-bottom: 32px;
+            position: relative;
         }
 
-        .timeline-item::before {
-            content: '';
+        .timeline-item:not(:last-child)::before {
+            content: "";
             position: absolute;
-            left: -26px;
-            width: 14px;
-            height: 14px;
-            background: var(--primary);
-            border-radius: 50%;
-            border: 3px solid var(--dark);
-            box-shadow: 0 0 10px var(--primary);
+            left: 23px;
+            top: 48px;
+            bottom: 0;
+            width: 2px;
+            background: var(--border);
         }
 
         .timeline-time {
+            width: 48px;
+            height: 48px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
             font-family: 'Space Mono', monospace;
-            color: var(--secondary);
+            font-size: 11px;
             font-weight: 700;
-            min-width: 80px;
+            flex-shrink: 0;
         }
 
-        .timeline-text {
-            color: var(--text);
+        .timeline-content h4 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .timeline-content p {
+            color: var(--text-muted);
+            font-size: 14px;
         }
 
         /* CTA Section */
         .cta-section {
-            background: linear-gradient(135deg, var(--primary), #ff8f5a);
-            border-radius: 20px;
-            padding: 40px;
+            padding: 80px 0;
+            background: var(--secondary);
             text-align: center;
-            margin-top: 20px;
+            color: white;
         }
 
         .cta-section h2 {
-            font-size: 32px;
-            margin-bottom: 15px;
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 16px;
         }
 
         .cta-section p {
             font-size: 18px;
-            opacity: 0.9;
-            margin-bottom: 10px;
+            opacity: 0.8;
+            margin-bottom: 32px;
         }
 
-        .cta-section .note {
-            font-size: 14px;
-            opacity: 0.7;
-            margin-top: 20px;
-        }
-
-        /* Register Button */
-        .register-btn {
-            display: inline-block;
-            background: white;
-            color: var(--dark);
-            padding: 15px 40px;
-            border-radius: 30px;
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--primary);
+            color: white;
+            padding: 16px 32px;
+            border-radius: 12px;
             text-decoration: none;
-            font-weight: 700;
+            font-weight: 600;
             font-size: 16px;
-            margin-top: 20px;
-            transition: all 0.3s ease;
+            transition: all 0.2s;
         }
 
-        .register-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        .cta-button:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
         }
 
         /* Footer */
-        .footer {
-            text-align: center;
-            padding: 40px 20px;
+        footer {
+            background: var(--white);
+            border-top: 1px solid var(--border);
+            padding: 40px 0;
+        }
+
+        .footer-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-text {
             color: var(--text-muted);
+            font-size: 14px;
         }
 
-        .footer .emoji {
-            font-size: 40px;
-            margin-bottom: 10px;
+        .footer-links {
+            display: flex;
+            gap: 24px;
         }
 
-        /* Mobile Responsive */
-        @media (max-width: 600px) {
-            .hero {
-                padding: 40px 10px;
-            }
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 14px;
+        }
 
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
             .hero h1 {
-                font-size: 32px;
+                font-size: 36px;
             }
 
-            .card {
-                padding: 20px;
+            .details-grid, .resources-grid {
+                grid-template-columns: 1fr;
             }
 
-            .timeline-item {
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .about-stats {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .hero-meta {
                 flex-direction: column;
-                align-items: flex-start;
-                gap: 5px;
-            }
-
-            .cta-section {
-                padding: 30px 20px;
+                gap: 16px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="bg-animation">
-        <div class="shape"></div>
-        <div class="shape"></div>
-        <div class="shape"></div>
-    </div>
-
-    <div class="container">
-        <!-- Hero -->
-        <div class="hero">
-            <div class="hero-badge">🏆 Mandate Hackathon 2026</div>
-            <h1>
-                AI Agent Building
-                <span>Build intelligent agents. Solve real mandate problems.</span>
-            </h1>
-            <div class="hero-date">
-                <span class="icon">📅</span>
-                <span class="date">10th April 2026</span>
-                <span>•</span>
-                <span>Juspay Office</span>
-            </div>
-        </div>
-
-        <!-- About the Hackathon -->
-        <div class="card">
-            <h2 class="card-title"><span class="icon">📢</span> About This Hackathon</h2>
-            <div style="line-height: 1.8; color: var(--text-muted);">
-                <p style="margin-bottom: 15px;">
-                    <strong style="color: var(--text);">Organized by:</strong> Mandate Team 🎯
-                </p>
-                <p style="margin-bottom: 15px;">
-                    <strong style="color: var(--text);">Aim:</strong> Get everyone hands-on with AI Agents using JAF framework. 
-                    Learn to build real-world agents that can solve actual problems we face in our mandate ecosystem.
-                </p>
-                <p>
-                    Whether you're new to AI agents or already have experience - this is your chance to build something 
-                    useful for the mandate domain and showcase your skills!
-                </p>
-            </div>
-        </div>
-
-        <!-- Resources -->
-        <div class="card">
-            <h2 class="card-title"><span class="icon">🛠️</span> Resources</h2>
-            <div class="resources-grid">
-                <div class="resource-card">
-                    <a href="https://github.com/xynehq/jaf-py" target="_blank">JAF Agentic Framework</a>
-                    <div class="desc">Build agents using Juspay's powerful framework</div>
-                </div>
-                <div class="resource-card">
-                    <a href="https://bitbucket.juspay.net/projects/JUSAI/repos/xyne-internal-agents-py/browse" target="_blank">Sample Agents</a>
-                    <div class="desc">Reference implementations to learn from</div>
-                </div>
-                <div class="resource-card">
-                    <a href="https://grid.ai.juspay.net/dashboard/" target="_blank">LLM Access</a>
-                    <div class="desc">Generate API keys for powerful models</div>
-                </div>
-                <div class="resource-card">
-                    <a href="https://www.youtube.com/watch?v=FwOTs4UxQS4" target="_blank">AI Agents Explained</a>
-                    <div class="desc">Video tutorial on agent basics</div>
-                </div>
-                <div class="resource-card">
-                    <a href="https://juspay.slack.com/archives/C05JYT2FMQV" target="_blank">Dev Tool</a>
-                    <div class="desc">Internal development tool (like Cline)</div>
-                </div>
-                <div class="resource-card">
-                    <a href="https://juspay.slack.com/archives/C08J9CA4GLE" target="_blank">Finetuning Session</a>
-                    <div class="desc">Learn to finetune your models</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- What You'll Build -->
-        <div class="card">
-            <h2 class="card-title"><span class="icon">🎯</span> What You'll Build</h2>
-            <a href="https://docs.google.com/document/d/15FJbhvocgLs6Dxb2k3tZTXuNfitD4_vIw_vRIJ4B3Dk/edit?tab=t.0" class="problem-link" target="_blank">
-                📋 View Sample Problems →
+    <header>
+        <div class="container header-inner">
+            <a href="#" class="logo">
+                <div class="logo-icon">M</div>
+                <div class="logo-text">Mandate <span>Team</span></div>
             </a>
+            <nav>
+                <a href="#about">About</a>
+                <a href="#resources">Resources</a>
+                <a href="#timeline">Timeline</a>
+            </nav>
         </div>
+    </header>
 
-        <!-- Why Participate -->
-        <div class="card">
-            <h2 class="card-title"><span class="icon">🏆</span> Why Participate?</h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">🤖</div>
-                    <div class="feature-text">Build real AI agents</div>
+    <section class="hero">
+        <div class="container">
+            <div class="hero-badge">🎉 Organized by Mandate Team</div>
+            <h1>AI Agent Building<br><span>Hackathon</span></h1>
+            <p class="hero-subtitle">Build intelligent AI agents to solve real Mandate problems. Join us for a day of innovation, coding, and fun!</p>
+            <div class="hero-meta">
+                <div class="meta-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
+                    </svg>
+                    <span><strong>10 April 2026</strong></span>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">💰</div>
-                    <div class="feature-text">Cash prizes</div>
+                <div class="meta-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span><strong>10:30 AM</strong> - 8:30 PM</span>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🧠</div>
-                    <div class="feature-text">Learn JAF</div>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🍕</div>
-                    <div class="feature-text">Food included</div>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">👥</div>
-                    <div class="feature-text">Team up</div>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">💻</div>
-                    <div class="feature-text">LLM access</div>
+                <div class="meta-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                    </svg>
+                    <span><strong>Juspay IndiCube Building</strong></span>
                 </div>
             </div>
         </div>
+    </section>
 
-        <!-- Timeline -->
-        <div class="card">
-            <h2 class="card-title"><span class="icon">⏰</span> Timeline</h2>
+    <section class="details-section">
+        <div class="container">
+            <div class="details-grid">
+                <div class="detail-card">
+                    <div class="detail-card-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="24" height="24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L20.25 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z" />
+                        </svg>
+                    </div>
+                    <h3>Build AI Agents</h3>
+                    <p>Use the JAF framework to build intelligent agents that solve real Mandate problems</p>
+                </div>
+                <div class="detail-card">
+                    <div class="detail-card-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="24" height="24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+                        </svg>
+                    </div>
+                    <h3>LLM Access</h3>
+                    <p>Get access to powerful LLMs for building and testing your AI agents</p>
+                </div>
+                <div class="detail-card">
+                    <div class="detail-card-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="24" height="24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z" />
+                        </svg>
+                    </div>
+                    <h3>Prizes & Recognition</h3>
+                    <p>Win exciting prizes and get recognition for your innovative solutions</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="about-section" id="about">
+        <div class="container">
+            <div class="section-header">
+                <h2>About This Hackathon</h2>
+                <p>Presented by the Mandate Team at Juspay</p>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>The AI Agent Building Hackathon is a hands-on event where you'll build AI agents using the JAF (Juspay Agent Framework) to solve real problems faced by the Mandate team.</p>
+                    <ul>
+                        <li>Work on real-world payment challenges</li>
+                        <li>Get mentorship from experienced developers</li>
+                        <li>Access to sample agents and documentation</li>
+                        <li>Collaborate with talented team members</li>
+                        <li>Showcase your solutions to the team</li>
+                    </ul>
+                </div>
+                <div class="about-stats">
+                    <div class="stat-box">
+                        <h4>50+</h4>
+                        <p>Expected Participants</p>
+                    </div>
+                    <div class="stat-box">
+                        <h4>10h</h4>
+                        <p>Hackathon Duration</p>
+                    </div>
+                    <div class="stat-box">
+                        <h4>₹10K+</h4>
+                        <p>Prize Pool</p>
+                    </div>
+                    <div class="stat-box">
+                        <h4>5+</h4>
+                        <p>Problem Statements</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="resources-section" id="resources">
+        <div class="container">
+            <div class="section-header">
+                <h2>Resources</h2>
+                <p>Everything you need to get started</p>
+            </div>
+            <div class="resources-grid">
+                <a href="#" class="resource-card">
+                    <div class="resource-card-header">
+                        <h3>JAF Framework</h3>
+                        <div class="resource-card-arrow">→</div>
+                    </div>
+                    <p>Build AI agents using our custom framework with built-in tools and integrations</p>
+                </a>
+                <a href="#" class="resource-card">
+                    <div class="resource-card-header">
+                        <h3>Sample Agents</h3>
+                        <div class="resource-card-arrow">→</div>
+                    </div>
+                    <p>Reference implementations to help you get started quickly</p>
+                </a>
+                <a href="#" class="resource-card">
+                    <div class="resource-card-header">
+                        <h3>LLM Access</h3>
+                        <div class="resource-card-arrow">→</div>
+                    </div>
+                    <p>API keys and documentation for accessing powerful language models</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="timeline-section" id="timeline">
+        <div class="container">
+            <div class="section-header">
+                <h2>Timeline</h2>
+                <p>A day packed with innovation and fun</p>
+            </div>
             <div class="timeline">
                 <div class="timeline-item">
-                    <span class="timeline-time">10:30 AM</span>
-                    <span class="timeline-text">Kickoff & Problem Briefing</span>
+                    <div class="timeline-time">10:30</div>
+                    <div class="timeline-content">
+                        <h4>Kickoff & Welcome</h4>
+                        <p>Introduction to the hackathon, problem statements, and team formation</p>
+                    </div>
                 </div>
                 <div class="timeline-item">
-                    <span class="timeline-time">1:00 PM</span>
-                    <span class="timeline-text">Lunch 🍕</span>
+                    <div class="timeline-time">11:00</div>
+                    <div class="timeline-content">
+                        <h4>Hacking Begins</h4>
+                        <p>Start building your AI agents</p>
+                    </div>
                 </div>
                 <div class="timeline-item">
-                    <span class="timeline-time">2:00 PM</span>
-                    <span class="timeline-text">Resume Hacking</span>
+                    <div class="timeline-time">13:00</div>
+                    <div class="timeline-content">
+                        <h4>Lunch Break</h4>
+                        <p>Refuel with delicious food</p>
+                    </div>
                 </div>
                 <div class="timeline-item">
-                    <span class="timeline-time">5:00 PM</span>
-                    <span class="timeline-text">Snacks & Progress Check</span>
+                    <div class="timeline-time">14:00</div>
+                    <div class="timeline-content">
+                        <h4>Continue Hacking</4>
+                        <p>Deep dive into development</p>
+                    </div>
                 </div>
                 <div class="timeline-item">
-                    <span class="timeline-time">7:00 PM</span>
-                    <span class="timeline-text">Dinner 🍽️</span>
+                    <div class="timeline-time">18:00</div>
+                    <div class="timeline-content">
+                        <h4>Submission Deadline</h4>
+                        <p>Submit your solutions</p>
+                    </div>
                 </div>
                 <div class="timeline-item">
-                    <span class="timeline-time">8:00 PM</span>
-                    <span class="timeline-text">Submission Deadline</span>
+                    <div class="timeline-time">18:30</div>
+                    <div class="timeline-content">
+                        <h4>Demos & Presentations</h4>
+                        <p>Showcase your work to the team</p>
+                    </div>
                 </div>
                 <div class="timeline-item">
-                    <span class="timeline-time">8:30 PM</span>
-                    <span class="timeline-text">Presentations & Prizes 🏆</span>
+                    <div class="timeline-time">19:30</div>
+                    <div class="timeline-content">
+                        <h4>Winners & Closing</h4>
+                        <p>Prize distribution and closing ceremony</p>
+                    </div>
                 </div>
-                <div class="timeline-item" style="color: var(--text-muted); font-style: italic;">
-                    <span class="timeline-time">Note:</span>
-                    <span class="timeline-text">If not completed, hackathon may extend to next day</span>
+                <div class="timeline-item">
+                    <div class="timeline-time">20:30</div>
+                    <div class="timeline-content">
+                        <h4>Wrap Up</h4>
+                        <p>Event concludes</p>
+                    </div>
                 </div>
             </div>
         </div>
+    </section>
 
-        <!-- CTA -->
-        <div class="cta-section">
-            <h2>🚀 Let's Build Something Awesome!</h2>
-            <p>Drop a message in #ai-agent-hackathon with your name & team (1-4 members)</p>
-            <a href="https://juspay.slack.com/archives/C08J9CA4GLE" class="register-btn" target="_blank">Join the Channel</a>
-            <div class="note">👥 Open to everyone - Developers, ML Enthusiasts, Interns!</div>
+    <section class="cta-section">
+        <div class="container">
+            <h2>Ready to Build?</h2>
+            <p>Join us on 10th April 2026 and create something amazing!</p>
+            <a href="#" class="cta-button">
+                Register Now
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="20" height="20">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                </svg>
+            </a>
         </div>
+    </section>
 
-        <!-- Footer -->
-        <div class="footer">
-            <div class="emoji">🤖💡</div>
-            <p>See you on 10th April!</p>
+    <footer>
+        <div class="container footer-inner">
+            <div class="footer-text">
+                © 2026 Mandate Team, Juspay. All rights reserved.
+            </div>
+            <div class="footer-links">
+                <a href="#">Contact</a>
+                <a href="#">Privacy</a>
+                <a href="#">Terms</a>
+            </div>
         </div>
-    </div>
+    </footer>
 </body>
 </html>
