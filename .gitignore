@@ -1,0 +1,38 @@
+# Private keys - NEVER commit these
+*.pem
+!euler-merchant-public.pem
+euler-merchant-private.pem
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Python virtual environment
+.venv/
+
+# Node modules
+node_modules/
+node-v20.18.1-darwin-arm64/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Build output
+dist/
+build/
